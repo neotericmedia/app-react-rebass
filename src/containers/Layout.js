@@ -8,33 +8,36 @@ import Home from "../containers/Home";
 import About from "../containers/About";
 
 function Layout() {
-  const [person, setPerson] = useState([
-    {
-      name: "John",
-      lname: "Baskins",
-    },
-    {
-      name: "Bob",
-      lname: "Barker",
-    },
-  ]);
+  const [person, setPerson] = useState({
+    persons: [
+      {
+        name: "John",
+        lname: "Baskins",
+        id: 1
+      },
+      {
+        name: "Bob",
+        lname: "Barker",
+        id: 2
+      },
+    ],
+    showPersons: false
+  });
 
   return (
     <>
       <Router>
         <Header />
+
         <Container>
           <Flex mx={-2} flexWrap="wrap">
             <Switch>
               <Route
                 path="/home"
-                render={(props) => (
-                  // <Home />
+                render={() => (
                   <Home
-                    // submit={this.handleSubmit}
-                    // name={name}
-                    // change={this.handleChange}
                     person={person}
+                    setPerson={setPerson}
                   />
                 )}
               />
@@ -44,6 +47,7 @@ function Layout() {
             </Switch>
           </Flex>
         </Container>
+
       </Router>
     </>
   );
