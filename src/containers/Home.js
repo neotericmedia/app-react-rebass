@@ -4,10 +4,7 @@ import People from './People';
 
 
 const Home = ({ person, setPerson }) => {
-  let personsCheck = null;
   const [name, setName] = useState("");
-
-
 
 
   const setUpState = (newName) => {
@@ -19,6 +16,10 @@ const Home = ({ person, setPerson }) => {
       ],
     });
   };
+  // console.log('PERSON', person.persons)
+  let personsCheck = null;
+
+
 
 
 
@@ -37,6 +38,8 @@ const Home = ({ person, setPerson }) => {
 
 
 
+
+
   const deleteClickhandler = (index) => {
     const persons = person.persons;
     persons.splice(index, 1);
@@ -48,10 +51,14 @@ const Home = ({ person, setPerson }) => {
 
 
 
+
+
   const togglePersonsHandler = () => {
     const doesShow = person.showPersons;
     setPerson({ ...person, showPersons: !doesShow });
   };
+
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Flex } from "rebass";
 
@@ -6,23 +6,20 @@ import Container from "../components/Container";
 import Header from "../containers/Header";
 import Home from "../containers/Home";
 import About from "../containers/About";
+import { MyPromise } from "../services/mockData"
 
 function Layout() {
-  const [person, setPerson] = useState({
-    persons: [
-      {
-        name: "John",
-        lname: "Baskins",
-        id: 1
-      },
-      {
-        name: "Bob",
-        lname: "Barker",
-        id: 2
-      },
-    ],
-    showPersons: false
-  });
+  const [newPerson, setNewPerson] = useState('');
+
+
+
+  useEffect(() => {
+    (async function gdata() {
+      setNewPerson(await MyPromise())
+    })();
+  }, []);
+
+
 
   return (
     <>
@@ -36,8 +33,8 @@ function Layout() {
                 path="/home"
                 render={() => (
                   <Home
-                    person={person}
-                    setPerson={setPerson}
+                    person={newPerson}
+                    setPerson={setNewPerson}
                   />
                 )}
               />
