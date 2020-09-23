@@ -11,7 +11,8 @@ const MockData = {
       id: 2
     },
   ],
-  showPersons: false
+  showPersons: false,
+  authenticated: false
 };
 
 

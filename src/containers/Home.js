@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Heading, Button, Card } from "rebass";
 import People from './People';
+import AuthContext from '../context/auth.context'
 
 
 const Home = ({ person, setPerson }) => {
   const [name, setName] = useState("");
+
+
+
+
+  const authContext = useContext(AuthContext);
+  console.log(authContext.authenticated);
+
+
 
 
   const setUpState = (newName) => {
@@ -80,6 +89,13 @@ const Home = ({ person, setPerson }) => {
 
 
 
+  const loginHandler = () => {
+    setPerson(...person, { authenticated: true });
+  };
+
+
+
+
   return (
     <>
       <Box
@@ -88,6 +104,7 @@ const Home = ({ person, setPerson }) => {
         backgroundColor="#ececec"
         sx={{ border: "1px solid red" }}
       >
+
 
 
 
@@ -102,7 +119,19 @@ const Home = ({ person, setPerson }) => {
 
 
 
-        {personsCheck}
+
+        <AuthContext.Provider
+          value={{
+            authenticated: person.authenticated,
+            login: loginHandler
+          }}
+        >
+          {personsCheck}
+        </AuthContext.Provider>
+
+
+
+        <button onClick={authContext.login}>Log in</button>
 
 
 
