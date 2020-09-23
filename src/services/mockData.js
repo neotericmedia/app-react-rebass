@@ -16,7 +16,8 @@ const MockData = {
 
 
 export const MyPromise = () =>
-  new Promise(resolve => setTimeout(() => resolve(MockData), 200));
+  new Promise(resolve => resolve(MockData));
+  // new Promise(resolve => setTimeout(() => resolve(MockData), 200));
 
 
 
