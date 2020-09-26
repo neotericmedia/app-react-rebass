@@ -43,11 +43,13 @@ function About() {
 
 
 
+
+
         <pre>{JSON.stringify(user, null, 2)}</pre>
 
         {user ?
           <button onClick={async () => setUser(null)}>
-            LOGOUT
+            LOG-OUT User
           </button>
           : <button
             onClick={async () => {

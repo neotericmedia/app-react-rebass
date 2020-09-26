@@ -16,7 +16,7 @@ const Home = ({ person, setPerson }) => {
       ...person,
       persons: [
         { name: newName, lname: "Vance", id: 1 },
-        { name: "Jay", lname: "Zzzz", id: 2 },
+        { name: "Jay", lname: "Buzzzzzzer", id: 2 },
       ],
     });
   };

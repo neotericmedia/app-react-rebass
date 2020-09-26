@@ -8,6 +8,7 @@ import Header from "../containers/Header";
 import Home from "../containers/Home";
 import About from "../containers/About";
 import Test from "../components/Test";
+import Reducer from "../components/Reducer";
 import { MyPromise } from "../services/mockData"
 import withClass from '../hoc/WithClass';
 import AuthContext from '../context/auth.context'
@@ -55,6 +56,7 @@ function Layout() {
               <AuthContext.Provider value={value}>
                 <Route path="/about" component={About} />
                 <Route path="/test" component={Test} />
+								<Route path="/reducer" component={Reducer} />
               </AuthContext.Provider>
 
 
