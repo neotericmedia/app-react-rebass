@@ -13,7 +13,7 @@ const Person = ({
     <>
 
       <Box>
-        <Heading as="H1" onClick={setUpState}>
+        <Heading onClick={setUpState}>
           {index + 1} {name} {lname}
         </Heading>
         <p onClick={deleteClick}>{lname}</p>

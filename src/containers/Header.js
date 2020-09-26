@@ -29,6 +29,9 @@ function Header() {
           <NewLink>
             <Link to="/about">About</Link>
           </NewLink>
+          <NewLink>
+            <Link to="/test">Test</Link>
+          </NewLink>
         </Flex>
       </Container>
     </Box>

@@ -10,11 +10,6 @@ const Home = ({ person, setPerson }) => {
 
 
 
-  const authContext = useContext(AuthContext);
-  console.log(authContext.authenticated);
-
-
-
 
   const setUpState = (newName) => {
     setPerson({
@@ -119,19 +114,7 @@ const Home = ({ person, setPerson }) => {
 
 
 
-
-        <AuthContext.Provider
-          value={{
-            authenticated: person.authenticated,
-            login: loginHandler
-          }}
-        >
-          {personsCheck}
-        </AuthContext.Provider>
-
-
-
-        <button onClick={authContext.login}>Log in</button>
+        {personsCheck}
 
 
 

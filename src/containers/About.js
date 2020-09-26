@@ -1,8 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Box, Button, Heading } from "rebass";
+import AuthContext from '../context/auth.context';
+import { login } from '../utils/login';
 
 function About() {
   const [name, setName] = useState("");
+
+
+
+  // const msg = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+
+
   const myRef = useRef();
   const buttonRef = useRef();
 
@@ -30,6 +39,31 @@ function About() {
   return (
     <>
       <Box>
+
+
+
+
+        <pre>{JSON.stringify(user, null, 2)}</pre>
+
+        {user ?
+          <button onClick={async () => setUser(null)}>
+            LOGOUT
+          </button>
+          : <button
+            onClick={async () => {
+              const user = await login();
+              setUser(user)
+            }}
+          >
+            LOGIN
+          </button>
+        }
+
+
+
+
+
+
         <Heading>{name}</Heading>
         <form onSubmit={onSubmit}>
 

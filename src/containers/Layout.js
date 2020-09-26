@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Flex } from "rebass";
 import classes from './Layout.css';
@@ -7,11 +7,20 @@ import Container from "../components/Container";
 import Header from "../containers/Header";
 import Home from "../containers/Home";
 import About from "../containers/About";
+import Test from "../components/Test";
 import { MyPromise } from "../services/mockData"
 import withClass from '../hoc/WithClass';
+import AuthContext from '../context/auth.context'
 
 function Layout() {
   const [newPerson, setNewPerson] = useState('');
+
+
+
+  // const [contextVal, setContextVal] = useState('hello from auth context');
+  const [user, setUser] = useState(null);
+  const value = useMemo(() => ({ user, setUser }), [user, setUser])
+
 
 
 
@@ -22,9 +31,9 @@ function Layout() {
   }, []);
 
 
-
   return (
     <>
+
       <Router>
         <Header />
 
@@ -40,7 +49,16 @@ function Layout() {
                   />
                 )}
               />
-              <Route path="/about" component={About} />
+
+
+
+              <AuthContext.Provider value={value}>
+                <Route path="/about" component={About} />
+                <Route path="/test" component={Test} />
+              </AuthContext.Provider>
+
+
+
               <Route path="/" component={Home} />
               <Route render={() => <span>Not found</span>} />
             </Switch>
