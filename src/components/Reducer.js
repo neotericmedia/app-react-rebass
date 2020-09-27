@@ -21,8 +21,6 @@ function reducer(state, action) {
 
 const Reducer = () => {
 	
-	
-	
 	const [{ todos }, dispatch] = useReducer(reducer, { todos: [] });
 	const [text, setText] = useState();
 

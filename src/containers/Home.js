@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
+
+import styled from "styled-components";
+// without pre
+// import { Box, Heading, Button, Card } from "rebass/styled-components";
 import { Box, Heading, Button, Card } from "rebass";
+
 import People from './People';
 import AuthContext from '../context/auth.context'
+
+
+
 
 
 const Home = ({ person, setPerson }) => {

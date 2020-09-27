@@ -13,6 +13,14 @@ import { MyPromise } from "../services/mockData"
 import withClass from '../hoc/WithClass';
 import AuthContext from '../context/auth.context'
 
+
+
+// const NewBox = styled(Box)`
+// 	font-size: ${({ theme }) => `${ theme.fontSizes[1] }px`};
+// `;
+
+
+
 function Layout() {
   const [newPerson, setNewPerson] = useState('');
 
@@ -21,7 +29,6 @@ function Layout() {
   // const [contextVal, setContextVal] = useState('hello from auth context');
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser])
-
 
 
 
