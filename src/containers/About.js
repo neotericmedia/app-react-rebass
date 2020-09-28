@@ -57,7 +57,7 @@ function About() {
               setUser(user)
             }}
           >
-            LOGIN
+            LOGINs
           </button>
         }
 

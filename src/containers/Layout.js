@@ -32,11 +32,20 @@ function Layout() {
 
 
 
+
   useEffect(() => {
-    (async function gdata() {
-      setNewPerson(await MyPromise())
-    })();
+		try {
+			// set loading to true
+			(async function gdata() {
+      	setNewPerson(await MyPromise())
+    	})();	
+		} catch(err) {
+			// set loading to false 
+			console.log(err)
+		}
   }, []);
+
+
 
 
   return (

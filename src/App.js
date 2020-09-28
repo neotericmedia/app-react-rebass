@@ -3,28 +3,26 @@ import { Normalize } from "styled-normalize";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "emotion-theming";
 import { preset } from "@rebass/preset";
+import newTheme from "./theme";
 import Layout from "./containers/Layout";
+
+
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: system-ui, sans-serif;
+		font-family: ${({ newTheme }) => theme.fonts.body };
   }
 `;
 
+
+
 const theme = {
   ...preset,
-  colors: {
-    text: "#000",
-    background: "#fff",
-    primary: "#07c",
-    // secondary: "#30c",
-    secondary: "red",
-    muted: "#f6f6f9",
-    gray: "#dddddf",
-    highlight: "hsla(205, 100%, 40%, 0.125)",
-  },
+	newTheme,
 };
-console.log(theme);
+console.log('THEME:', theme);
+
+
 
 function App() {
   return (
@@ -35,5 +33,7 @@ function App() {
     </ThemeProvider>
   );
 }
+
+
 
 export default App;

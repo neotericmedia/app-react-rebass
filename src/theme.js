@@ -1,4 +1,4 @@
- export default {
+export default {
   breakpoints: ['40em', '52em', '64em'],
   fontSizes: [
     12, 14, 16, 20, 24, 32, 48, 64
@@ -39,3 +39,15 @@
     }
   }
 }
+
+
+//   colors: {
+//     text: "#000",
+//     background: "#fff",
+//     primary: "#07c",
+//     // secondary: "#30c",
+//     secondary: "red",
+//     muted: "#f6f6f9",
+//     gray: "#dddddf",
+//     highlight: "hsla(205, 100%, 40%, 0.125)",
+//   },
