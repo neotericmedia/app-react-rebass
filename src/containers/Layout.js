@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Flex } from "rebass";
 import classes from './Layout.css';
@@ -8,7 +8,7 @@ import Header from "../containers/Header";
 import Home from "../containers/Home";
 import About from "../containers/About";
 import Test from "../components/Test";
-import Reducer from "../components/Reducer";
+import ReducerForm from "../components/ReducerForm";
 import { MyPromise } from "../services/mockData"
 import withClass from '../hoc/WithClass';
 import AuthContext from '../context/auth.context'
@@ -34,15 +34,15 @@ function Layout() {
 
 
   useEffect(() => {
-		try {
-			// set loading to true
-			(async function gdata() {
-      	setNewPerson(await MyPromise())
-    	})();	
-		} catch(err) {
-			// set loading to false 
-			console.log(err)
-		}
+    try {
+      // set loading to true
+      (async function gdata() {
+        setNewPerson(await MyPromise())
+      })();
+    } catch (err) {
+      // set loading to false 
+      console.log(err)
+    }
   }, []);
 
 
@@ -72,7 +72,7 @@ function Layout() {
               <AuthContext.Provider value={value}>
                 <Route path="/about" component={About} />
                 <Route path="/test" component={Test} />
-								<Route path="/reducer" component={Reducer} />
+                <Route path="/reducer" component={ReducerForm} />
               </AuthContext.Provider>
 
 

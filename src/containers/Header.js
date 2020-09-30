@@ -32,6 +32,9 @@ function Header() {
           <NewLink>
             <Link to="/test">Test</Link>
           </NewLink>
+          <NewLink>
+            <Link to="/reducer">Reducer</Link>
+          </NewLink>
         </Flex>
       </Container>
     </Box>

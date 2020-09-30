@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Button, Card } from "rebass";
+import { Box, Heading } from "rebass";
 
 const Person = ({
   name,

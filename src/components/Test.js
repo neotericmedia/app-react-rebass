@@ -5,7 +5,7 @@ function Test() {
 
 
   // const msg = useContext(AuthContext);
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
 
 

@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 
-import styled from "styled-components";
+// import styled from "styled-components";
 // without pre
 // import { Box, Heading, Button, Card } from "rebass/styled-components";
 import { Box, Heading, Button, Card } from "rebass";
 
 import People from './People';
-import AuthContext from '../context/auth.context'
+// import AuthContext from '../context/auth.context'
 
 
 
@@ -92,9 +92,9 @@ const Home = ({ person, setPerson }) => {
 
 
 
-  const loginHandler = () => {
-    setPerson(...person, { authenticated: true });
-  };
+  // const loginHandler = () => {
+  //   setPerson(...person, { authenticated: true });
+  // };
 
 
 
