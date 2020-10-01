@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import styled from 'styled-components';
 import { Box, Button, Flex, Card, Heading } from 'rebass';
 import {
@@ -31,13 +31,73 @@ const Disclaimer = ({ value, isLoggedIn }) => {
 
 
 
+function loginReducer(state, action) {
+  switch (action.type) {
+    case 'field': {
+      return {
+        ...state,
+        [action.field]: action.value,
+      };
+    }
+    case 'login': {
+      return {
+        ...state,
+        isLoading: true,
+        error: '',
+      };
+    }
+    case 'success': {
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+      };
+    }
+    case 'error': {
+      return {
+        ...state,
+        error: 'The username or password is incorrect',
+        isLoading: false,
+        username: '',
+        password: ''
+      };
+    }
+    case 'logout': {
+      return {
+        ...state,
+        isLoggedIn: false,
+        username: '',
+        password: ''
+      };
+    }
+    default:
+      return {
+        isLoggedIn: true,
+      };
+  }
+}
+
+
+
+const initialState = {
+  username: '',
+  password: '',
+  isLoading: false,
+  error: '',
+  isLoggedIn: false,
+};
+
+
 
 function ReducerForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [error, setError] = useState(false);
+  const [state, dispatch] = useReducer(loginReducer, initialState);
+  const { username, password, isLoading, isLoggedIn, error } = state;
+
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [isLoggedIn, setLoggedIn] = useState(false);
+  // const [error, setError] = useState('');
   const value = "Theres still huge some kind of weird error going on";
 
 
@@ -46,15 +106,19 @@ function ReducerForm() {
     e.preventDefault();
     // setUsername('');
     // setPassword('');
-    setError('')
-    setIsLoading(true);
+    // setError('')
+    // setIsLoading(true);
+    dispatch({ type: 'login' })
     try {
       await loginCreds({ username, password });
-      setLoggedIn(true);
+      // setLoggedIn(true);
+      dispatch({ type: 'success' })
     } catch (error) {
-      setError('The username or password is incorrect');
+      // setError('The username or password is incorrect');
+      dispatch({ type: 'error' })
     }
-    setIsLoading(false);
+    // dispatch({ type: 'logout' })
+    // setIsLoading(false);
   }
 
 
@@ -72,13 +136,16 @@ function ReducerForm() {
             <Box width={1}>
 
 
+
+
               {isLoggedIn ? (
                 <>
                   <Disclaimer
                     value={`Welcome ${username}`}
                     isLoggedIn={isLoggedIn}
                   />
-                  <Button width={1} py={3} onClick={(() => setLoggedIn(false))}>
+                  {/* <Button width={1} py={3} onClick={(() => setLoggedIn(false))}> */}
+                  <Button width={1} py={3} onClick={() => dispatch({ type: 'logout' })}>
                     Log Out
                   </Button>
                 </>
@@ -95,7 +162,13 @@ function ReducerForm() {
                         id='name'
                         name='name'
                         value={username}
-                        onChange={e => setUsername(e.target.value)}
+                        // onChange={e => setUsername(e.target.value)}
+                        onChange={e =>
+                          dispatch({
+                            type: 'field',
+                            field: 'username',
+                            value: e.currentTarget.value
+                          })}
                       />
                     </Box>
 
@@ -107,7 +180,13 @@ function ReducerForm() {
                         id='password'
                         name='password'
                         value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        // onChange={e => setPassword(e.target.value)}
+                        onChange={e =>
+                          dispatch({
+                            type: 'field',
+                            field: 'password',
+                            value: e.currentTarget.value
+                          })}
                       />
                     </Box>
 
