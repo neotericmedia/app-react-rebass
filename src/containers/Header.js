@@ -33,7 +33,13 @@ function Header() {
             <Link to="/test">Test</Link>
           </NewLink>
           <NewLink>
+            <Link to="/todos">To Dos</Link>
+          </NewLink>
+          <NewLink>
             <Link to="/reducer">Reducer</Link>
+          </NewLink>
+          <NewLink>
+            <Link to="/reducer2">Reducer2</Link>
           </NewLink>
         </Flex>
       </Container>

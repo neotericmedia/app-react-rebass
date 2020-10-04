@@ -26,74 +26,28 @@ const Disclaimer = ({ value, isLoggedIn }) => {
   )
 }
 
-function loginReducer(state, action) {
-  switch (action.type) {
-    case 'field': {
-      return {
-        ...state,
-        [action.field]: action.value,
-      };
-    }
-    case 'login': {
-      return {
-        ...state,
-        isLoading: true,
-        error: '',
-      };
-    }
-    case 'success': {
-      return {
-        ...state,
-        isLoggedIn: true,
-        isLoading: false,
-      };
-    }
-    case 'error': {
-      return {
-        ...state,
-        error: 'The username or password is incorrect',
-        isLoading: false,
-        username: '',
-        password: ''
-      };
-    }
-    case 'logout': {
-      return {
-        ...state,
-        isLoggedIn: false,
-        username: '',
-        password: ''
-      };
-    }
-    default:
-      return {
-        isLoggedIn: true,
-      };
-  }
-}
 
-const initialState = {
-  username: '',
-  password: '',
-  isLoading: false,
-  error: '',
-  isLoggedIn: false,
-};
 
 function ReducerForm() {
-  const [state, dispatch] = useReducer(loginReducer, initialState);
-  const { username, password, isLoading, isLoggedIn, error } = state;
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const value = "Theres still huge some kind of weird error going on";
 
   const submit = async e => {
     e.preventDefault();
-    dispatch({ type: 'login' })
+    setError('')
+    setIsLoading(true);
     try {
       await loginCreds({ username, password });
-      dispatch({ type: 'success' })
+      setLoggedIn(true);
     } catch (error) {
-      dispatch({ type: 'error' })
+      setError('The username or password is incorrect');
     }
+    setIsLoading(false);
   }
 
   return (
@@ -113,13 +67,12 @@ function ReducerForm() {
                     value={`Welcome ${username}`}
                     isLoggedIn={isLoggedIn}
                   />
-                  <Button width={1} py={3} onClick={() => dispatch({ type: 'logout' })}>
+                  <Button width={1} py={3} onClick={(() => setLoggedIn(false))}>
                     Log Out
                   </Button>
                 </>
               ) : (
                   <>
-
                     <Box>
                       {error && <Disclaimer value={value} />}
                       <Heading as='h1' textAlign="center">Login</Heading>
@@ -128,12 +81,7 @@ function ReducerForm() {
                         id='name'
                         name='name'
                         value={username}
-                        onChange={e =>
-                          dispatch({
-                            type: 'field',
-                            field: 'username',
-                            value: e.currentTarget.value
-                          })}
+                        onChange={e => setUsername(e.currentTarget.value)}
                       />
                     </Box>
 
@@ -145,12 +93,7 @@ function ReducerForm() {
                         id='password'
                         name='password'
                         value={password}
-                        onChange={e =>
-                          dispatch({
-                            type: 'field',
-                            field: 'password',
-                            value: e.currentTarget.value
-                          })}
+                        onChange={e => setPassword(e.currentTarget.value)}
                       />
                     </Box>
 

@@ -9,8 +9,8 @@ export const login = () => {
 
 
 
-export async function loginCreds({ username, password }) {
-  return new Promise((resolve, reject) =>
+export const loginCreds = ({ username, password }) =>
+  new Promise((resolve, reject) =>
     setTimeout(() => {
       if (username === 'Bob' && password === 'password') {
         resolve();
@@ -19,4 +19,19 @@ export async function loginCreds({ username, password }) {
       }
     }, 1000)
   )
-};
+
+
+
+// export async function loginCreds({ username, password }) {
+//   return new Promise((resolve, reject) =>
+//     setTimeout(() => {
+//       if (username === 'Bob' && password === 'password') {
+//         resolve();
+//       } else {
+//         reject();
+//       }
+//     }, 1000)
+//   )
+// };
+
+
