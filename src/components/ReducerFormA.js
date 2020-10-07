@@ -35,7 +35,7 @@ function ReducerForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const value = "Theres still huge some kind of weird error going on";
+  const value = "Theres still huge some kind of weird error going ons";
 
   const submit = async e => {
     e.preventDefault();
