@@ -1,4 +1,7 @@
 import React, { useState, useReducer } from 'react';
+// import produce from 'immer';
+import { useImmerReducer } from 'use-immer';
+
 import styled from 'styled-components';
 import { Box, Button, Flex, Card, Heading } from 'rebass';
 import {
@@ -26,51 +29,88 @@ const Disclaimer = ({ value, isLoggedIn }) => {
   )
 }
 
-function loginReducer(state, action) {
+function loginReducer(draft, action) {
   switch (action.type) {
     case 'field': {
-      return {
-        ...state,
-        [action.field]: action.value,
-      };
+      draft[action.field] = action.value;
+      return
     }
     case 'login': {
-      return {
-        ...state,
-        isLoading: true,
-        error: '',
-      };
+      draft.isLoading = true;
+      draft.error = '';
+      return
     }
     case 'success': {
-      return {
-        ...state,
-        isLoggedIn: true,
-        isLoading: false,
-      };
+      draft.isLoggedIn = true;
+      draft.isLoading = false;
+      return
     }
     case 'error': {
-      return {
-        ...state,
-        error: 'The username or password is incorrect',
-        isLoading: false,
-        username: '',
-        password: ''
-      };
+      draft.error = 'The username or password is incorrect';
+      draft.isLoading = false;
+      draft.username = '';
+      draft.password = '';
+      return
     }
     case 'logout': {
-      return {
-        ...state,
-        isLoggedIn: false,
-        username: '',
-        password: ''
-      };
+      draft.isLoggedIn = false;
+      draft.username = '';
+      draft.password = '';
+      return
     }
     default:
-      return {
-        isLoggedIn: true,
-      };
+      draft.isLoggedIn = true;
+      return
   }
 }
+
+// function loginReducer(state, action) {
+//   switch (action.type) {
+//     case 'field': {
+//       return {
+//         ...state,
+//         [action.field]: action.value,
+//       };
+//     }
+//     case 'login': {
+//       return {
+//         ...state,
+//         isLoading: true,
+//         error: '',
+//       };
+//     }
+//     case 'success': {
+//       return {
+//         ...state,
+//         isLoggedIn: true,
+//         isLoading: false,
+//       };
+//     }
+//     case 'error': {
+//       return {
+//         ...state,
+//         error: 'The username or password is incorrect',
+//         isLoading: false,
+//         username: '',
+//         password: ''
+//       };
+//     }
+//     case 'logout': {
+//       return {
+//         ...state,
+//         isLoggedIn: false,
+//         username: '',
+//         password: ''
+//       };
+//     }
+//     default:
+//       return {
+//         isLoggedIn: true,
+//       };
+//   }
+// }
+
+// const curriedLoginReducer = produce(loginReducer);
 
 const initialState = {
   username: '',
@@ -80,8 +120,15 @@ const initialState = {
   isLoggedIn: false,
 };
 
+
+
+
+
 function ReducerForm() {
-  const [state, dispatch] = useReducer(loginReducer, initialState);
+  // const [state, dispatch] = useReducer(loginReducer, initialState);
+  // const [state, dispatch] = useReducer(curriedLoginReducer, initialState);
+  const [state, dispatch] = useImmerReducer(loginReducer, initialState);
+
   const { username, password, isLoading, isLoggedIn, error } = state;
   const value = "Theres still huge some kind of weird error going on";
 
